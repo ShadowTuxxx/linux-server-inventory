@@ -5,7 +5,7 @@ A ideia é que mesmo quem nunca viu Linux consiga acompanhar.
 
 ---
 
-## 📜 O Script
+## 📜 O Script 01-collectSource.sh
 
 ```bash
 #!/bin/bash
