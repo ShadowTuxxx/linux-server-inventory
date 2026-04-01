@@ -1,11 +1,11 @@
-# Script de Inventário de Servidor Linux
+# 01-collectSource.sh
 
 Este documento contém um **script Bash** para coletar inventário de um servidor Linux, acompanhado de **comentários didáticos** explicando cada comando, parâmetro e construção.  
 A ideia é que mesmo quem nunca viu Linux consiga acompanhar.
 
 ---
 
-## 📜 O Script 01-collectSource.sh
+## 📜 O Script
 
 ```bash
 #!/bin/bash
@@ -147,10 +147,18 @@ done
 
 # ---------------------------------------------------------
 echo
+echo "[7/10] (Reservado para futuras coletas)"
+# Este passo pode ser usado para adicionar novos itens no inventário futuramente.
+
+# ---------------------------------------------------------
+echo
 echo "[8/10] Rede..."
 
 ip addr show > "$BASE_DIR/ip_addr.txt"
+# ip addr show → lista todos os endereços de rede (IPs)
+
 ip route show > "$BASE_DIR/ip_route.txt"
+# ip route show → lista as rotas de rede configuradas
 
 # ---------------------------------------------------------
 echo
@@ -159,31 +167,24 @@ echo "[9/10] Firewall..."
 if command -v firewall-cmd >/dev/null 2>&1; then
   firewall-cmd --list-all-zones > "$BASE_DIR/firewalld_zones.txt"
 fi
+# Se o firewall estiver instalado, lista todas as zonas e regras
 
-# ---------------------------------------------------------
-echo
-echo "[OK] Coleta concluída"
 # ---------------------------------------------------------
 echo
 echo "[10/10] Informações adicionais do sistema..."
 
 uname -a > "$BASE_DIR/uname.txt"
 # uname -a → mostra informações do kernel e do sistema operacional
-# Inclui versão do Linux, arquitetura, nome da máquina
 
 df -h > "$BASE_DIR/discos.txt"
 # df -h → mostra uso de disco em formato legível (GB/MB)
-# h = human-readable
 
 free -h > "$BASE_DIR/memoria.txt"
 # free -h → mostra uso de memória RAM
-# h = human-readable
 
 uptime > "$BASE_DIR/uptime.txt"
 # uptime → mostra há quanto tempo o servidor está ligado
-# Também mostra carga média do sistema
 
 # ---------------------------------------------------------
 echo
 echo "[OK] Coleta concluída"
-# Mensagem final avisando que terminou com sucesso
